@@ -1,4 +1,4 @@
-module gjinja
+module tmpl
 
 go 1.21.1
 
