@@ -51,6 +51,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         files: ./${{ env.ZIP_FILE }}
+        fail_on_unmatched_files: true
         # upload_url: ${{ steps.create_release.outputs.upload_url }}
         # asset_path: ./"${RUNNER_OS}-tmpl.zip"
         # asset_name: "${RUNNER_OS}-tmpl.zip"
