@@ -7,5 +7,5 @@ A CLI tool for replacing content in files based on Jinja2 templates.
   - [Installation](#installation)
 
 ## Installation
-```bash
-go
+
+Download the latest release from the [releases page](https://github.com/Rishang/tmpl/releases) and extract the binary to a directory in your Linux PATH.
