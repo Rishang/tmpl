@@ -32,6 +32,7 @@ jobs:
       run: |
         zip "${{ env.ZIP_FILE }}" tmpl
         test -f "${{ env.ZIP_FILE }}"
+        ls -l
 
     # - name: Create Release
     #   id: create_release
