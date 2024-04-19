@@ -77,12 +77,12 @@ func main() {
 
 func usage() {
     fmt.Fprintf(flag.CommandLine.Output(), "Usage of %s:\n", os.Args[0])
-    fmt.Println("Gjinja is a CLI tool for replacing content in files based on Jinja2 templates.")
+    fmt.Println("tmpl is a CLI tool for replacing content in files based on Jinja2 templates.")
     fmt.Println("Options:")
     flag.PrintDefaults()
     fmt.Println("\nExamples:")
-    fmt.Println("  gjinja -p /path/to/directory -c /path/to/config.json")
-    fmt.Println("  gjinja -f /path/to/file.txt -c /path/to/config.json")
+    fmt.Println("  tmpl -p /path/to/directory -c /path/to/config.json")
+    fmt.Println("  tmpl -f /path/to/file.txt -c /path/to/config.json")
     fmt.Println("\nThe config file should contain JSON formatted like:")
     fmt.Println(`  [
     {"type": "string", "key": "appName", "value": "Gjinja"},
