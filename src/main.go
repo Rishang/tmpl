@@ -83,12 +83,18 @@ func usage() {
     fmt.Println("\nExamples:")
     fmt.Println("  tmpl -p /path/to/directory -c /path/to/config.json")
     fmt.Println("  tmpl -f /path/to/file.txt -c /path/to/config.json")
-    fmt.Println("\nThe config file should contain JSON formatted like:")
+    fmt.Println("\nThe config file should contain JSON formatted like below example:")
     fmt.Println(`  [
     {"type": "string", "key": "appName", "value": "Gjinja"},
     {"type": "base64", "key": "secret", "value": "c2VjcmV0"},
     {"type": "command", "key": "cwd", "value": "pwd"}
-  ]`)
+  ]
+  ----
+  File.txt:
+
+  Hello {{ appName }}! Your secret is {{ secret }} at {{ cwd }}.
+  ----
+  `)
 }
 
 func readConfig(path string) ([]ConfigItem, error) {
