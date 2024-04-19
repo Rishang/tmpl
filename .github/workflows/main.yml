@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    working-directory: ./src
 
     steps:
     - name: Checkout code
