@@ -18,63 +18,6 @@ type ConfigItem struct {
     Value string `json:"value"`
 }
 
-func main() {
-    path := flag.String("p", "", "Specify the path to the directory where files will be updated.")
-    configFile := flag.String("c", "tmpl.json", "Specify the path to the JSON configuration file. Default is 'tmpl.json'.")
-    file := flag.String("f", "", "Specify the path to a single file to update.")
-    flag.Usage = usage
-    flag.Parse()
-
-    if *file != "" && *path != "" {
-        fmt.Println("Error: -f and -p flags are mutually exclusive.")
-        return
-    }
-
-    configItems, err := readConfig(*configFile)
-    if err != nil {
-        fmt.Println("Error reading config, for cli reference use --help flag:", err)
-        return
-    }
-
-    context := make(map[string]interface{})
-    for _, item := range configItems {
-        value, err := processConfigItem(item)
-        if err != nil {
-            fmt.Printf("Error processing config item '%s': %v\n", item.Key, err)
-            continue
-        }
-        context[item.Key] = value
-    }
-
-    if *file != "" {
-        fmt.Println("Updating:", *file)
-        if err := updateFile(*file, context); err != nil {
-            fmt.Println("Error updating file:", err)
-        }
-    } else if *path != "" {
-        err = filepath.Walk(*path, func(path string, info os.FileInfo, err error) error {
-            if err != nil {
-                return err
-            }
-            if !info.IsDir() {
-                fmt.Println("Updating:", info.Name())
-                err := updateFile(path, context)
-                if err != nil {
-                    fmt.Println("Error updating file:", err)
-                }
-            }
-            return nil
-        })
-
-        if err != nil {
-            fmt.Println("Error processing files:", err)
-        }
-    } else {
-        fmt.Println("Error: Either -f or -p must be specified.")
-        flag.Usage()
-    }
-}
-
 func usage() {
     fmt.Fprintf(flag.CommandLine.Output(), "Usage of %s:\n", os.Args[0])
     fmt.Println("tmpl is a CLI tool for replacing content in files based on Jinja2 templates.")
@@ -147,4 +90,62 @@ func updateFile(filePath string, context map[string]interface{}) error {
     }
 
     return ioutil.WriteFile(filePath, []byte(rendered), 0644)
+}
+
+
+func main() {
+    path := flag.String("p", "", "Specify the path to the directory where files will be updated.")
+    configFile := flag.String("c", "tmpl.json", "Specify the path to the JSON configuration file. Default is 'tmpl.json'.")
+    file := flag.String("f", "", "Specify the path to a single file to update.")
+    flag.Usage = usage
+    flag.Parse()
+
+    if *file != "" && *path != "" {
+        fmt.Println("Error: -f and -p flags are mutually exclusive.")
+        return
+    }
+
+    configItems, err := readConfig(*configFile)
+    if err != nil {
+        fmt.Println("Error reading config, for cli reference use --help flag:", err)
+        return
+    }
+
+    context := make(map[string]interface{})
+    for _, item := range configItems {
+        value, err := processConfigItem(item)
+        if err != nil {
+            fmt.Printf("Error processing config item '%s': %v\n", item.Key, err)
+            continue
+        }
+        context[item.Key] = value
+    }
+
+    if *file != "" {
+        fmt.Println("Updating:", *file)
+        if err := updateFile(*file, context); err != nil {
+            fmt.Println("Error updating file:", err)
+        }
+    } else if *path != "" {
+        err = filepath.Walk(*path, func(path string, info os.FileInfo, err error) error {
+            if err != nil {
+                return err
+            }
+            if !info.IsDir() {
+                fmt.Println("Updating:", info.Name())
+                err := updateFile(path, context)
+                if err != nil {
+                    fmt.Println("Error updating file:", err)
+                }
+            }
+            return nil
+        })
+
+        if err != nil {
+            fmt.Println("Error processing files:", err)
+        }
+    } else {
+        fmt.Println("Error: Either -f or -p must be specified.")
+        flag.Usage()
+    }
 }
