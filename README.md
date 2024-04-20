@@ -15,6 +15,10 @@ Download the latest release from the [releases page](https://github.com/Rishang/
 
 ## Usage
 
+This tool can be used to replace content in files based on Jinja2 templates. So it can be helpful in replacing placeholders in configuration files, etc.
+
+- In CI/CD pipelines to replace placeholders in configuration files.
+
 ### How to use the CLI tool
 
 Here is the help message for the CLI tool:
