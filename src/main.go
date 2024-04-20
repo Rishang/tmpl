@@ -21,7 +21,7 @@ type ConfigItem struct {
 func usage() {
     fmt.Fprintf(flag.CommandLine.Output(), "Usage of %s:\n", os.Args[0])
     fmt.Println("tmpl is a CLI tool for replacing content in files based on Jinja2 templates.")
-    fmt.Println("Options:")
+    fmt.Println("\nOptions:")
     flag.PrintDefaults()
     fmt.Println("\nExamples:")
     fmt.Println("  tmpl -p /path/to/directory -c /path/to/config.json")
