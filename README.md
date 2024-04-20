@@ -1,5 +1,5 @@
 # tmpl
-A CLI tool for replacing content in files based on Jinja2 templates.
+A CLI tool for replacing content in file or directory based on Jinja2 templates.
 
 ## Table of Contents
 - [tmpl](#tmpl)
