@@ -55,10 +55,13 @@ The config file should contain JSON formatted like below example:
     }
   ]
   ----
-  File.txt:
+  Example:
+  tmpl -f /path/to/file.txt -c /path/to/config.json
+  
+  file.txt:
 
   Hello {{ appName }}! Your secret is {{ secret }} at {{ cwd }}.
   ----
-  Output:
+  Output saved to file.txt:
   Hello Gjinja! Your secret is mysecret as /home/user.
 ```

@@ -27,16 +27,34 @@ func usage() {
     fmt.Println("  tmpl -p /path/to/directory -c /path/to/config.json")
     fmt.Println("  tmpl -f /path/to/file.txt -c /path/to/config.json")
     fmt.Println("\nThe config file should contain JSON formatted like below example:")
-    fmt.Println(`  [
-    {"type": "string", "key": "appName", "value": "Gjinja"},
-    {"type": "base64", "key": "secret", "value": "c2VjcmV0"},
-    {"type": "command", "key": "cwd", "value": "pwd"}
-  ]
-  ----
-  File.txt:
-
-  Hello {{ appName }}! Your secret is {{ secret }} at {{ cwd }}.
-  ----
+    fmt.Println(`
+    [
+      {
+        "type": "string",
+        "key": "appName",
+        "value": "Gjinja"
+      },
+      {
+        "type": "base64",
+        "key": "secret",
+        "value": "bXlzZWNyZXQ="
+      },
+      {
+        "type": "command",
+        "key": "cwd",
+        "value": "pwd"
+      }
+    ]
+    ----
+    Example:
+    tmpl -f /path/to/file.txt -c /path/to/config.json
+    
+    file.txt:
+  
+    Hello {{ appName }}! Your secret is {{ secret }} at {{ cwd }}.
+    ----
+    Output saved to file.txt:
+    Hello Gjinja! Your secret is mysecret as /home/user.
   `)
 }
 
